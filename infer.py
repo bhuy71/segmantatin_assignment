@@ -31,7 +31,7 @@ if __name__ == "__main__":
     parser.add_argument("--image_path", required=True, help="Đường dẫn tới ảnh đầu vào")
     args = parser.parse_args()
 
-    checkpoint_path = "checkpoint/best_model.pth"
+    checkpoint_path = "best_model.pth"
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model = UnetPlusPlus(
         encoder_name="efficientnet-b6",
@@ -53,6 +53,6 @@ if __name__ == "__main__":
 
     color_dict = {0: (0, 0, 0), 1: (255, 0, 0), 2: (0, 255, 0)}  
     output_mask = postprocess_mask(output_mask, color_dict)
-    output_path = "working/segmented_output.png"
+    output_path = "segmented_output.png"
     cv2.imwrite(output_path, cv2.cvtColor(output_mask, cv2.COLOR_RGB2BGR))
     print(f"Output Image saved at: {output_path}")
